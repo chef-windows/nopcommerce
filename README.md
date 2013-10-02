@@ -75,7 +75,7 @@ Attributes
     <td><tt>['nopcommerce']['apppath']</tt></td>
     <td>String</td>
     <td>The relative path to the nopCommerce directory where the shop files will be created.</td>
-    <td><tt>shop</tt></td>
+    <td><tt>/shop</tt></td>
   </tr>
   <tr>
     <td><tt>['nopcommerce']['poolname']</tt></td>
