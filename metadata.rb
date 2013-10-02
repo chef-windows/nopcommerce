@@ -6,7 +6,7 @@ description      'Installs and configures nopCommerce, the shopping cart softwar
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.1.0'
 
-%w{iis windows}.each do |d|
+%w{iis windows 7-zip}.each do |d|
   depends d
 end
 
