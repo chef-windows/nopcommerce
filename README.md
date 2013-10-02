@@ -101,6 +101,19 @@ Just include `nopcommerce` in your node's `run_list`:
 }
 ```
 
+#### nopcommerce::sampledata
+
+Installs the app with sample data. Just include `nopcommerce::sampledata` in your node's `run_list`:
+
+```json
+{
+  "name":"my_node",
+  "run_list": [
+    "recipe[nopcommerce::sampledata]"
+  ]
+}
+```
+
 Contributing
 ------------
 
