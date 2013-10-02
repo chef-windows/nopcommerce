@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: nopcommerce
-# Recipe:: default
+# Recipe:: demo
 # Author:: Bakh Inamov (<bakh@opscode.com>)
 #
 # Copyright (C) 2013 Opscode, Inc.
@@ -20,13 +20,13 @@
 
 include_recipe "nopcommerce"
 
-#Get the sample data zipfile
-remote_file node['nopcommerce']['localsampledatazip'] do
-  source node['nopcommerce']['sampledatazip']
+#Get the demo data zipfile
+remote_file node['nopcommerce']['localdemozip'] do
+  source node['nopcommerce']['demozip']
 end
 
-#uncompress the sample data zipfile
-batch "unzip sample data to nopcommerce" do
-  code "#{node['7-zip']['home']}\\7z.exe x #{node['nopcommerce']['localsampledatazip']} -o#{node['nopcommerce']['approot']}\\nopCommerce -y"
+#uncompress the demo data zipfile
+batch "unzip demo data to nopcommerce" do
+  code "#{node['7-zip']['home']}\\7z.exe x #{node['nopcommerce']['localdemozip']} -o#{node['nopcommerce']['approot']}\\nopCommerce -y"
   creates "#{node['nopcommerce']['approot']}\\nopCommerce\\App_Data\\Nop.Db.sdf"
 end

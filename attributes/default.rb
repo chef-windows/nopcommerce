@@ -20,8 +20,8 @@
 default['nopcommerce']['dist'] = 'https://dl.dropboxusercontent.com/u/47541301/nopCommerce/nopCommerce_3.10_NoSource.zip'
 default['nopcommerce']['localzip'] = 'c:\nopCommerce.zip'
 
-default['nopcommerce']['sampledatazip'] = 'https://dl.dropboxusercontent.com/u/58250/nopcommerce_data.zip'
-default['nopcommerce']['localsampledatazip'] = 'c:\sampledatazip.zip'
+default['nopcommerce']['demozip'] = 'https://dl.dropboxusercontent.com/u/58250/nopcommerce_data.zip'
+default['nopcommerce']['localdemozip'] = 'c:\demozip.zip'
 
 # I like to isolate these away from the default, wwwroot
 default['nopcommerce']['siteroot'] = "#{ENV['SYSTEMDRIVE']}\\inetpub\\sites\\nopCommerce"

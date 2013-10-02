@@ -47,16 +47,16 @@ Attributes
     <td><tt>c:\nopCommerce.zip</tt></td>
   </tr>
   <tr>
-    <td><tt>['nopcommerce']['sampledatazip']</tt></td>
+    <td><tt>['nopcommerce']['demozip']</tt></td>
     <td>String</td>
-    <td>Where to get the sample data zip file from</td>
+    <td>Where to get the demo data zip file from</td>
     <td><tt>https://dl.dropboxusercontent.com/u/58250/nopcommerce_data.zip</tt></td>
   </tr>
   <tr>
-    <td><tt>['nopcommerce']['localsampledatazip']</tt></td>
+    <td><tt>['nopcommerce']['localdemozip']</tt></td>
     <td>String</td>
-    <td>Where the sample data zip file gets saved on the managed node</td>
-    <td><tt>c:\sampledatazip.zip</tt></td>
+    <td>Where the demo data zip file gets saved on the managed node</td>
+    <td><tt>c:\demozip.zip</tt></td>
   </tr>
 
   <tr>
@@ -101,15 +101,15 @@ Just include `nopcommerce` in your node's `run_list`:
 }
 ```
 
-#### nopcommerce::sampledata
+#### nopcommerce::demo
 
-Installs the app with sample data. Just include `nopcommerce::sampledata` in your node's `run_list`:
+Installs the app with demo data. Just include `nopcommerce::demo` in your node's `run_list`. The demo is reachable at http://your.server.name/shop :
 
 ```json
 {
   "name":"my_node",
   "run_list": [
-    "recipe[nopcommerce::sampledata]"
+    "recipe[nopcommerce::demo]"
   ]
 }
 ```

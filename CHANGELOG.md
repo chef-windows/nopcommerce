@@ -5,7 +5,7 @@ This file is used to list changes made in each version of the nopcommerce cookbo
 
 0.1.1
 -----
-- Bakh Inamov (<bakh@opscode.com>) - Made it work on AWS EC2 and added sampledata recipe.
+- Bakh Inamov (<bakh@opscode.com>) - Works on AWS EC2 and has a demo recipe.
 
 0.1.0
 -----
