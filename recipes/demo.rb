@@ -20,13 +20,9 @@
 
 include_recipe "nopcommerce"
 
-#Get the demo data zipfile
-remote_file node['nopcommerce']['localdemozip'] do
+windows_zipfile "#{node['nopcommerce']['approot']}\\nopCommerce" do
   source node['nopcommerce']['demozip']
-end
-
-#uncompress the demo data zipfile
-batch "unzip demo data to nopcommerce" do
-  code "#{node['7-zip']['home']}\\7z.exe x #{node['nopcommerce']['localdemozip']} -o#{node['nopcommerce']['approot']}\\nopCommerce -y"
-  creates "#{node['nopcommerce']['approot']}\\nopCommerce\\App_Data\\Nop.Db.sdf"
+  action :unzip
+  overwrite true
+  not_if {::File.exists?(::File.join(node['nopcommerce']['approot'], 'nopCommerce\App_Data\Nop.Db.sdf'))}
 end

@@ -21,7 +21,6 @@ Lightweight Resources and Providers (LWRPs) from the following cookbooks are use
 
 * iis
 * windows
-* 7-zip
 
 Attributes
 ----------
@@ -41,24 +40,11 @@ Attributes
     <td><tt>https://dl.dropboxusercontent.com/u/47541301/nopCommerce/nopCommerce_3.10_NoSource.zip</tt></td>
   </tr>
   <tr>
-    <td><tt>['nopcommerce']['localzip']</tt></td>
-    <td>String</td>
-    <td>Where the source zip file gets saved on the managed node</td>
-    <td><tt>c:\nopCommerce.zip</tt></td>
-  </tr>
-  <tr>
     <td><tt>['nopcommerce']['demozip']</tt></td>
     <td>String</td>
     <td>Where to get the demo data zip file from</td>
-    <td><tt>https://dl.dropboxusercontent.com/u/58250/nopcommerce_data.zip</tt></td>
+    <td><tt>https://dl.dropboxusercontent.com/u/14471872/nopcommerce_data.zip</tt></td>
   </tr>
-  <tr>
-    <td><tt>['nopcommerce']['localdemozip']</tt></td>
-    <td>String</td>
-    <td>Where the demo data zip file gets saved on the managed node</td>
-    <td><tt>c:\demozip.zip</tt></td>
-  </tr>
-
   <tr>
     <td><tt>['nopcommerce']['siteroot']</tt></td>
     <td>String</td>

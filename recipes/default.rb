@@ -27,9 +27,9 @@ end
 # Pre-requisite features for IIS-ASPNET45 that need to be installed first, in this order.
 %w{IIS-ISAPIFilter IIS-ISAPIExtensions NetFx3ServerFeatures NetFx4Extended-ASPNET45 IIS-NetFxExtensibility45}.each do |f|
 
-#If on EC2 enable those features
+#These features need to be enabled for EC2
   batch "dism #{f}" do
-    only_if { node[:cloud][:provider] == "ec2" }
+    only_if { node[:cloud][:provider] == "ec2" rescue false }
     code "dism /online /Enable-Feature /FeatureName:#{f}"
   end
 
@@ -55,15 +55,10 @@ directory node['nopcommerce']['siteroot'] do
   action :create
 end
 
-include_recipe "7-zip"
-
-remote_file node['nopcommerce']['localzip'] do
+windows_zipfile node['nopcommerce']['approot'] do
   source node['nopcommerce']['dist']
-end
-
-batch "unzip to nopcommerce" do
-  code "#{node['7-zip']['home']}\\7z.exe x #{node['nopcommerce']['localzip']} -o#{node['nopcommerce']['approot']} -y"
-  creates "#{node['nopcommerce']['approot']}\\nopCommerce\\Web.config"
+  action :unzip
+  not_if {::File.exists?(::File.join(node['nopcommerce']['approot'], "nopCommerce"))}
 end
 
 %w{App_Data bin Content Content\\Images Content\\Images\\Thumbs Content\\Images\\Uploaded Content\\files\\ExportImport Plugins Plugins\\bin}.each do |d|
