@@ -26,13 +26,6 @@ end
 
 # Pre-requisite features for IIS-ASPNET45 that need to be installed first, in this order.
 %w{IIS-ISAPIFilter IIS-ISAPIExtensions NetFx3ServerFeatures NetFx4Extended-ASPNET45 IIS-NetFxExtensibility45}.each do |f|
-
-#These features need to be enabled for EC2
-  batch "dism #{f}" do
-    only_if { node[:cloud][:provider] == "ec2" rescue false }
-    code "dism /online /Enable-Feature /FeatureName:#{f}"
-  end
-
   windows_feature f do
     action :install
   end
@@ -48,12 +41,6 @@ service "iis" do
 end
 
 include_recipe "iis::remove_default_site"
-
-directory node['nopcommerce']['siteroot'] do
-  rights :read, 'IIS_IUSRS'
-  recursive true
-  action :create
-end
 
 windows_zipfile node['nopcommerce']['approot'] do
   source node['nopcommerce']['dist']
@@ -76,6 +63,12 @@ end
 iis_pool node['nopcommerce']['poolname'] do
   runtime_version "4.0"
   action :add
+end
+
+directory node['nopcommerce']['siteroot'] do
+  rights :read, 'IIS_IUSRS'
+  recursive true
+  action :create
 end
 
 iis_site 'nopCommerce' do
