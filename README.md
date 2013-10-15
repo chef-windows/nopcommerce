@@ -89,7 +89,7 @@ Just include `nopcommerce` in your node's `run_list`:
 
 #### nopcommerce::demo
 
-Installs the app with demo data. Just include `nopcommerce::demo` in your node's `run_list`. The demo is reachable at http://your.server.name/shop :
+Installs demo data using built-in data storage (SQL Server Compact). Just include `nopcommerce::demo` in your node's `run_list`. The demo is reachable at http://your.server.name/shop :
 
 ```json
 {
