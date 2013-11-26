@@ -99,7 +99,9 @@ Installs demo data using built-in data storage (SQL Server Compact). Just includ
   ]
 }
 ```
-
+### Non-Local Database connection Strings.
+Env/Role/Node attributes should be referenced in the following format:
+{"defaults":{"nopcommerce":{"db":{"host":"test.opscode.com","database":"test","user":"test","password":"test}}
 Contributing
 ------------
 
