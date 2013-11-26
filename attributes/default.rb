@@ -25,3 +25,4 @@ default['nopcommerce']['siteroot'] = "#{ENV['SYSTEMDRIVE']}\\inetpub\\sites\\nop
 default['nopcommerce']['approot'] = "#{ENV['SYSTEMDRIVE']}\\inetpub\\apps"
 default['nopcommerce']['apppath'] = '/shop'
 default['nopcommerce']['poolname'] = 'nopCommerce'
+default['nopcommerce']['dbstrings'] = "#{ENV['SYSTEMDRIVE']}\\inetpub\\apps\\nopCommerce\\App_Data\\Settings.txt"
