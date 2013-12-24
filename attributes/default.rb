@@ -26,3 +26,10 @@ default['nopcommerce']['approot'] = "#{ENV['SYSTEMDRIVE']}\\inetpub\\apps"
 default['nopcommerce']['apppath'] = '/shop'
 default['nopcommerce']['poolname'] = 'nopCommerce'
 default['nopcommerce']['dbstrings'] = "#{ENV['SYSTEMDRIVE']}\\inetpub\\apps\\nopCommerce\\App_Data\\Settings.txt"
+
+
+#Adding some more attributes to help with sqlcmd.rb
+default['nopcommerce']['required_sql'] = "#{ENV['SYSTEMDRIVE']}\\chef\\cache\\create_required_data.sql"
+default['nopcommerce']['sample_sql'] = "#{ENV['SYSTEMDRIVE']}\\chef\\cache\\create_sample_data.sql"
+default['nopcommerce']['dbstrings'] = "#{ENV['SYSTEMDRIVE']}\\inetpub\\apps\\nopCommerce\\App_Data\\Settings.txt"
+default['nopcommerce']['arch'] = node['kernel']['os_info']['os_architecture']
