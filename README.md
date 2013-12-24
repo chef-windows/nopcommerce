@@ -174,10 +174,10 @@ Env/Role/Node attributes should be referenced in the following format:
 
     "nopcommerce": {
       "db": {
-        "host": "npcomm2.ceghs2ja2rph.us-east-1.rds.amazonaws.com",
-        "database": "npcomm",
-        "user": "npcomm",
-        "password": "npcomm12"
+        "host": "npcomm2.bestwebsiteevar.com",
+        "database": "database",
+        "user": "username",
+        "password": "password"
       }
 ```
 
