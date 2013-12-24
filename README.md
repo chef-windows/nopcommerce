@@ -1,8 +1,9 @@
 Description
 ===========
 
-Installs and configures the nopCommerce ASP.NET shopping cart application.
+Installs and configures the nopCommerce ASP.NET shopping cart application with option to autogenerate prepopulated sql content to the SQL/Express server of your choice.
 
+============
 Requirements
 ============
 
@@ -11,8 +12,18 @@ Platforms
 
 * Windows Server 2012
 * Windows Server 2012 R2
+* 
+Note: Windows Server 2008 and 2008 R2, as tested on ec2, do not appear to be working.
 
-Windows Server 2008 and 2008 R2, as tested on ec2, do not appear to be working.
+
+===========
+Optional
+============
+Database
+---------
+For use of remote database connection strings, Microsoft SQL Full or SQL Express.
+
+
 
 Cookbooks
 ---------
