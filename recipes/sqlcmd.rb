@@ -1,7 +1,10 @@
 #
 # Cookbook Name:: nopcommerce
 # Recipe:: sqlcmd
-# Author:: Rhiannon Portwood (<rhiannon@getchef.com>)
+# Authors:: Rhiannon Portwood (<rhiannon@getchef.com>)
+## :: Alex Vinyar (<alexv@getchef.com>)
+## :: Bakh Inamov (<bakh@getchef.com>)
+## :: Isa Farnick (<isa@getchef.com>)
 #
 # Copyright (C) 2013 Opscode, Inc.
 # 
