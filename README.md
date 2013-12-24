@@ -82,6 +82,61 @@ Attributes
   </tr>
 </table>
 
+
+
+###nopcommerce::sqlcmd
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['nopcommerce']['dbstrings']</tt></td>
+    <td>String</td>
+    <td>Default path for database connection strings</td>
+    <td><tt>Usually C:/inetpub/apps/nopCommerce/App_Data/Settings.txt </tt></td>
+  </tr>
+  <tr>
+    <td><tt>['nopcommerce']['required_sql']</tt></td>
+    <td>String</td>
+    <td>Temp storage of SQL Data</td>
+    <td><tt>Path: Usually: C:/chef/cache/create_required_data.sql</tt></td>
+  </tr>
+    <tr>
+    <td><tt>['nopcommerce']['sample_sql']</tt></td>
+    <td>String</td>
+    <td>Temp storage of SQL Data</td>
+    <td><tt>Path: Usually: C:/chef/cache/create_sample_data.sql</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['nopcommerce']['db']['host']</tt></td>
+    <td>String</td>
+    <td>Environment Attribute, Role Attribute, Node Attribute that defines database host, IP, or endpoint (note that this connection string assumes your default port is 1433.</td>
+    <td><tt>hostname</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['nopcommerce']['db']['database']</tt></td>
+    <td>String</td>
+    <td>Environment Attribute, Role Attribute, Node Attribute that defines the initial database name.</td>
+    <td><tt>hostname</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['nopcommerce']['db']['user']</tt></td>
+    <td>String</td>
+    <td>Environment Attribute, Role Attribute, Node Attribute that defines database username with appropriate permissions to create database. </td>
+    <td><tt>hostname</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['nopcommerce']['db']['password']</tt></td>
+    <td>String</td>
+    <td>Environment Attribute, Role Attribute, Node Attribute that defines database password.</td>
+    <td><tt>hostname</tt></td>
+  </tr>
+  </table>
+
 Usage
 =====
 
@@ -110,9 +165,24 @@ Installs demo data using built-in data storage (SQL Server Compact). Just includ
   ]
 }
 ```
-### Non-Local Database connection Strings.
+### nopcommerce::sqlcmd
+
+Installs demo data using remote database strings (SQL Server Full or Express). Special care taken to install sqlcmd.exe instead of full sql server.  If you do not want sample data, swap out sql file, or import your own using the path.  To utilize recipe, include `nopcommerce::sqlcmd` in your node's `run_list` or as an `include_recipe` directive in your `default.rb` recipe. The demo is reachable at http://your.server.name/shop  with initial admin credentials of user:admin@yourshop.com, password:admin (change those immediately):
+
 Env/Role/Node attributes should be referenced in the following format:
-{"defaults":{"nopcommerce":{"db":{"host":"test.opscode.com","database":"test","user":"test","password":"test}}
+```json
+
+    "nopcommerce": {
+      "db": {
+        "host": "npcomm2.ceghs2ja2rph.us-east-1.rds.amazonaws.com",
+        "database": "npcomm",
+        "user": "npcomm",
+        "password": "npcomm12"
+      }
+```
+
+
+
 Contributing
 ------------
 
