@@ -121,19 +121,19 @@ Attributes
     <td><tt>['nopcommerce']['db']['database']</tt></td>
     <td>String</td>
     <td>Environment Attribute, Role Attribute, Node Attribute that defines the initial database name.</td>
-    <td><tt>hostname</tt></td>
+    <td><tt>Initial database name. Note: this will not be Nopcommerce utilized database, as the database used by Nopcommerce will be populated by sqls script included in templates directory.</tt></td>
   </tr>
   <tr>
     <td><tt>['nopcommerce']['db']['user']</tt></td>
     <td>String</td>
     <td>Environment Attribute, Role Attribute, Node Attribute that defines database username with appropriate permissions to create database. </td>
-    <td><tt>hostname</tt></td>
+    <td><tt>Database Username with permissions to create new databases :P </tt></td>
   </tr>
   <tr>
     <td><tt>['nopcommerce']['db']['password']</tt></td>
     <td>String</td>
     <td>Environment Attribute, Role Attribute, Node Attribute that defines database password.</td>
-    <td><tt>hostname</tt></td>
+    <td><tt>Database password credential (you can also use databags.)</tt></td>
   </tr>
   </table>
 
@@ -193,7 +193,7 @@ Contributing
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
 
-License and Author
+License and Author(s)
 ==================
 
 Author:: Julian C. Dunn (<jdunn@opscode.com>)
