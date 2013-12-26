@@ -22,22 +22,34 @@
 #
 ##DEFAULT ADMIN USER/PASS= admin@yourstore.com,admin
 
+include_recipe "nopcommerce"
+
+##Adding Remote DB Connection Strings to skip install
+##References attributes that should be specified in role, or env, or node, as well as recipe.
+##Moving Parts:
+##**Attribute referenced in cookbook attributes: default['nopcommerce']['dbstrings'] = "#{ENV['SYSTEMDRIVE']}\\inetpub\\apps\\nopCommerce\\App_Data\\Settings.txt"
+##**Env/Role/Node Attribtues, see readme.
+##** Settings.txt.erb which references above attributes.
+template "#{node['nopcommerce']['dbstrings']}" do
+  source "Settings.txt.erb"
+end
+
 
 #Installs Drivers and SQL Command for 32 bit stuff
 windows_package "ODBC Driver X32" do
   source "https://dl.dropboxusercontent.com/s/fri5ed57nhg39ex/msodbcsql_32.msi"
- action :install
+  action :install
   installer_type :msi
   options "IACCEPTMSODBCSQLLICENSETERMS=YES"
- only_if { node['kernel']['os_info']['os_architecture'] == '32-bit' }
+  only_if { node['kernel']['os_info']['os_architecture'] == '32-bit' }
 end
 
 windows_package "MSQL CMD Line Utilities X32" do
   source "https://dl.dropboxusercontent.com/s/2nkfzzbdqxppsfq/MsSqlCmdLnUtils_32.msi"
- action :install
+  action :install
   installer_type :msi
- options "IACCEPTMSSQLCMDLNUTILSLICENSETERMS=YES"
- only_if { node['kernel']['os_info']['os_architecture'] == '32-bit' }
+  options "IACCEPTMSSQLCMDLNUTILSLICENSETERMS=YES"
+  only_if { node['kernel']['os_info']['os_architecture'] == '32-bit' }
 end
 
 #Installs Drivers and SQL Command for 64 bit stuff
@@ -46,21 +58,21 @@ windows_package "ODBC Driver X64" do
   action :install
   installer_type :msi
   options "IACCEPTMSODBCSQLLICENSETERMS=YES"
- only_if { node['kernel']['os_info']['os_architecture'] == '64-bit' }
+  only_if { node['kernel']['os_info']['os_architecture'] == '64-bit' }
 end
 
 windows_package "MSQL CMD Line Utilities X64" do
   source "https://dl.dropboxusercontent.com/s/qwcy245ehzws3hr/MsSqlCmdLnUtils_64.msi"
- only_if { node['kernel']['os_info']['os_architecture'] == '64-bit' }
- action :install
- installer_type :msi
- options "IACCEPTMSSQLCMDLNUTILSLICENSETERMS=YES"
+  only_if { node['kernel']['os_info']['os_architecture'] == '64-bit' }
+  action :install
+  installer_type :msi
+  options "IACCEPTMSSQLCMDLNUTILSLICENSETERMS=YES"
 end
 
 #Merrily sets Path for sqlcmd
 #Noticed this has to run twice sometimes to set the SQLCMD path...
 windows_path "sqlcmd.exe" do
- path 'C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn'
+  path 'C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn'
   action :add
 end
 
@@ -68,8 +80,7 @@ end
 #Two SQL files exist in templates, one is required data for the application to display content,
 #the other has sample data prepopulated (default.)
 template "#{node['nopcommerce']['required_sql']}" do
-#not_if {::File.exists?(::File.join("#{node['nopcommerce']['required_sql']}"))}
-source "nopcommerce_with_sample.sql"
+  source "nopcommerce_with_sample.sql"
 end
 
 
@@ -78,12 +89,10 @@ windows_batch "upload_initial_databases" do
   code <<-EOH
 sqlcmd -S #{node['nopcommerce']['db']['host']} -U #{node['nopcommerce']['db']['user']} -P #{node['nopcommerce']['db']['password']} -i #{node['nopcommerce']['required_sql']}
  EOH
-#not_if {::File.exists?(::File.join("#{node['nopcommerce']['dbstrings']}"))}
 end
 
 
 #Adding DB Connection Strings to Settings.txt
 template "#{node['nopcommerce']['dbstrings']}" do
-source "Settings.txt.erb"
-#not_if {::File.exists?(::File.join("#{node['nopcommerce']['dbstrings']}"))}
+  source "Settings.txt.erb"
 end
