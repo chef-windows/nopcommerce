@@ -33,3 +33,9 @@ default['nopcommerce']['required_sql'] = "#{ENV['SYSTEMDRIVE']}\\chef\\cache\\cr
 default['nopcommerce']['sample_sql'] = "#{ENV['SYSTEMDRIVE']}\\chef\\cache\\create_sample_data.sql"
 default['nopcommerce']['dbstrings'] = "#{ENV['SYSTEMDRIVE']}\\inetpub\\apps\\nopCommerce\\App_Data\\Settings.txt"
 default['nopcommerce']['arch'] = node['kernel']['os_info']['os_architecture']
+
+# Set your database connection strings here
+default['nopcommerce']['db']['host'] = 'nopcommerce.ceghs2ja2rph.us-east-1.rds.amazonaws.com'
+default['nopcommerce']['db']['database'] = 'nopcommerce'
+default['nopcommerce']['db']['user'] = 'opscode' 
+default['nopcommerce']['db']['password'] = 'opscode123'

@@ -85,13 +85,3 @@ iis_app 'nopCommerce' do
   physical_path "#{node['nopcommerce']['approot']}\\nopCommerce"
   action :add
 end
-
-##Adding Remote DB Connection Strings to skip install
-##References attributes that should be specified in role, or env, or node, as well as recipe.
-##Moving Parts:
-##**Attribute referenced in cookbook attributes: default['nopcommerce']['dbstrings'] = "#{ENV['SYSTEMDRIVE']}\\inetpub\\apps\\nopCommerce\\App_Data\\Settings.txt"
-##**Env/Role/Node Attribtues, see readme.
-##** Settings.txt.erb which references above attributes.
-Template "#{node['nopcommerce']['dbstrings']}" do
-source "Settings.txt.erb"
-end
