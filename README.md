@@ -1,8 +1,9 @@
 Description
 ===========
 
-Installs and configures the nopCommerce ASP.NET shopping cart application.
+Installs and configures the nopCommerce ASP.NET shopping cart application with option to autogenerate prepopulated sql content to the SQL/Express server of your choice.
 
+============
 Requirements
 ============
 
@@ -11,8 +12,18 @@ Platforms
 
 * Windows Server 2012
 * Windows Server 2012 R2
+* 
+Note: Windows Server 2008 and 2008 R2, as tested on ec2, do not appear to be working.
 
-Windows Server 2008 and 2008 R2, as tested on ec2, do not appear to be working.
+
+===========
+Optional
+============
+Database
+---------
+For use of remote database connection strings, Microsoft SQL Full or SQL Express.
+
+
 
 Cookbooks
 ---------
@@ -71,6 +82,61 @@ Attributes
   </tr>
 </table>
 
+
+
+###nopcommerce::sqlcmd
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['nopcommerce']['dbstrings']</tt></td>
+    <td>String</td>
+    <td>Default path for database connection strings</td>
+    <td><tt>Usually C:/inetpub/apps/nopCommerce/App_Data/Settings.txt </tt></td>
+  </tr>
+  <tr>
+    <td><tt>['nopcommerce']['required_sql']</tt></td>
+    <td>String</td>
+    <td>Temp storage of SQL Data</td>
+    <td><tt>Path: Usually: C:/chef/cache/create_required_data.sql</tt></td>
+  </tr>
+    <tr>
+    <td><tt>['nopcommerce']['sample_sql']</tt></td>
+    <td>String</td>
+    <td>Temp storage of SQL Data</td>
+    <td><tt>Path: Usually: C:/chef/cache/create_sample_data.sql</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['nopcommerce']['db']['host']</tt></td>
+    <td>String</td>
+    <td>Environment Attribute, Role Attribute, Node Attribute that defines database host, IP, or endpoint (note that this connection string assumes your default port is 1433.</td>
+    <td><tt>hostname</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['nopcommerce']['db']['database']</tt></td>
+    <td>String</td>
+    <td>Environment Attribute, Role Attribute, Node Attribute that defines the initial database name.</td>
+    <td><tt>Initial database name. Note: this will not be Nopcommerce utilized database, as the database used by Nopcommerce will be populated by sqls script included in templates directory.</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['nopcommerce']['db']['user']</tt></td>
+    <td>String</td>
+    <td>Environment Attribute, Role Attribute, Node Attribute that defines database username with appropriate permissions to create database. </td>
+    <td><tt>Database Username with permissions to create new databases :P </tt></td>
+  </tr>
+  <tr>
+    <td><tt>['nopcommerce']['db']['password']</tt></td>
+    <td>String</td>
+    <td>Environment Attribute, Role Attribute, Node Attribute that defines database password.</td>
+    <td><tt>Database password credential (you can also use databags.)</tt></td>
+  </tr>
+  </table>
+
 Usage
 =====
 
@@ -99,6 +165,23 @@ Installs demo data using built-in data storage (SQL Server Compact). Just includ
   ]
 }
 ```
+### nopcommerce::sqlcmd
+
+Installs demo data using remote database strings (SQL Server Full or Express). Special care taken to install sqlcmd.exe instead of full sql server.  If you do not want sample data, swap out sql file, or import your own using the path.  To utilize recipe, include `nopcommerce::sqlcmd` in your node's `run_list` or as an `include_recipe` directive in your `default.rb` recipe. The demo is reachable at http://your.server.name/shop  with initial admin credentials of user:admin@yourshop.com, password:admin (change those immediately):
+
+Env/Role/Node attributes should be referenced in the following format:
+```json
+
+    "nopcommerce": {
+      "db": {
+        "host": "npcomm2.bestwebsiteevar.com",
+        "database": "database",
+        "user": "username",
+        "password": "password"
+      }
+```
+
+
 
 Contributing
 ------------
@@ -110,7 +193,7 @@ Contributing
 5. Run the tests, ensuring they all pass
 6. Submit a Pull Request using Github
 
-License and Author
+License and Author(s)
 ==================
 
 Author:: Julian C. Dunn (<jdunn@opscode.com>)
